@@ -24,14 +24,6 @@ public class SpringbootQQLogBack {
                         logger.debug(m, e);
                     }
                     break;
-                case INFO:
-                case SUCCESS:
-                    if (e == null) {
-                        logger.info(m);
-                    } else {
-                        logger.info(m, e);
-                    }
-                    break;
                 case WARNING:
                     if (e == null) {
                         logger.warn(m);
@@ -46,6 +38,7 @@ public class SpringbootQQLogBack {
                         logger.error(m, e);
                     }
                     break;
+                    // info & success
                 default:
                     if (e == null) {
                         logger.info(m);
