@@ -6,24 +6,29 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.5.RELEASE</version>
-        <relativePath/>
-    </parent>
+<!--    <parent>-->
+<!--        <groupId>org.sonatype.oss</groupId>-->
+<!--        <artifactId>oss-parent</artifactId>-->
+<!--        <version>7</version>-->
+<!--    </parent>-->
 
-    <groupId>io.github.ForteScarlet.simple-robot-core</groupId>
+    <groupId>io.github.ForteScarlet.simple-robot</groupId>
     <artifactId>core-spring-boot-starter</artifactId>
     <!-- version 1.9.0 20/3/27 -->
     <version>1.9.0</version>
 
     <dependencies>
-
+<!--        &lt;!&ndash; parent &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-parent</artifactId>-->
+<!--            <version>2.2.5.RELEASE</version>-->
+<!--        </dependency>-->
         <!-- springboot starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+            <version>2.2.5.RELEASE</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.github.ForteScarlet/simple-robot-core -->
@@ -37,7 +42,7 @@
 
 
     <scm>
-        <url>https://github.com/ForteScarlet/simple-robot-component-coolHttpApi</url>
+        <url>https://github.com/ForteScarlet/simple-robot-core-springboot-starter</url>
     </scm>
 
 
@@ -102,12 +107,10 @@
                         <checkModificationExclude>release-pom.xml</checkModificationExclude>
 
                         <checkModificationExclude>jdonframework.iml</checkModificationExclude>
-                        <checkModificationExclude>JdonAccessory/jdon-hibernate3x/jdon-hibernate3x.iml
-                        </checkModificationExclude>
+                        <checkModificationExclude>JdonAccessory/jdon-hibernate3x/jdon-hibernate3x.iml</checkModificationExclude>
                         <checkModificationExclude>JdonAccessory/jdon-jdbc/jdon-jdbc.iml</checkModificationExclude>
                         <checkModificationExclude>JdonAccessory/jdon-remote/jdon-remote.iml</checkModificationExclude>
-                        <checkModificationExclude>JdonAccessory/jdon-struts1x/jdon-struts1x.iml
-                        </checkModificationExclude>
+                        <checkModificationExclude>JdonAccessory/jdon-struts1x/jdon-struts1x.iml</checkModificationExclude>
                     </checkModificationExcludes>
                 </configuration>
                 <dependencies>
@@ -228,7 +231,7 @@
             <!--<dept> No </dept>-->
             <!--</properties>-->
             <!-- 项目开发者所在时区， -11到12范围内的整数。 -->
-            <!--<timezone> -5 </timezone>-->
+            <timezone>+8</timezone>
             <!-- 项目开发者的全名 -->
             <name>ForteScarlet</name>
             <!-- 项目开发者的email -->
