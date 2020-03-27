@@ -34,6 +34,9 @@
 
 
 # 使用
+如果你使用的是我编写的标准版的快速启动器，你只需要将原本Springboot启动器上的`@SpringbootApplication`注解替换为`@SimpleRobotSpringBootApplication`即可。
+如果是第三方所提供的启动器，则遵循其定义的规则。
+
 如果启动器完整且正常，你最终可以得到如下内容：
 - 当前组件所实现的`BaseApplication`启动器实例，例如CQ HTTP组件的`CoolQHttpApplication`
 - 当前组件所实现的，`BaseApplication`启动后所得到的组件实现的`SimpleRobotContext`实例，例如CQ HTTP组件的`CQHttpXContext`
