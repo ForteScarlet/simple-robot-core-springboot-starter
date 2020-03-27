@@ -105,5 +105,5 @@ implementation 'io.github.ForteScarlet.simple-robot:core-spring-boot-starter:${v
 
 整合后，日志所使用的`name`为`simple-robot-app + 随机颜表情`的名称。其中，`simple-robot-app`后面是有一个空格的。
 
-如果想要关闭颜表情，你可以在项目启动器调用`FaceUtil.close()` 
+如果想要关闭颜表情，你可以在项目启动**之前**调用`FaceUtil.close()` 
 
