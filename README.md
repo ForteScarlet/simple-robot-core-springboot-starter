@@ -92,7 +92,7 @@ implementation 'io.github.ForteScarlet.simple-robot:core-spring-boot-starter:${v
 ```
 如有需要请自行覆盖并更替其版本。
 
-## 快速启动器的日志整合
+## 3 快速启动器的日志整合
 官方的组件快速启动器中，`QQLog`的日志输出已经被重定向到了Springboot所使用的`slf4j`日志中，其中日志等级的对应关系为：
 
 | QQLog的日志等级 | slf4j的日志等级 |
