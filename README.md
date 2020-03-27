@@ -10,8 +10,14 @@
 
 ##  组件启动器
 我为一些特定的组件提供了其专属的启动器。
+一般来讲，所有官方（即我）推出的启动器都只需要如上文所说的，
+将配置文件更换为properties格式并将`@SpringbootApplication`注解替换为`@SimpleRobotSpringbootApplication`即可。
 <br>
-**to be continue...**
+以下我将展示已经提供了官方启动器的项目地址，以供参考。
+<br>
+
+### CQ HTTP 组件Springboot启动器
+https://github.com/ForteScarlet/simple-robot-component-cqhttp-springboot-starter
 
 ## 自定义启动器
 如果你想要通过核心启动器来自定义一个启动器，那么你需要先选择导入核心启动器：
