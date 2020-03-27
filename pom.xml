@@ -13,9 +13,8 @@
         <relativePath/>
     </parent>
 
-    <groupId>io.github.simple-robot</groupId>
+    <groupId>io.github.ForteScarlet.simple-robot-core</groupId>
     <artifactId>core-spring-boot-starter</artifactId>
-
     <!-- version 1.9.0 20/3/27 -->
     <version>1.9.0</version>
 

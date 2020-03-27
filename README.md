@@ -13,11 +13,11 @@
 ## 自定义启动器
 如果你想要通过核心启动器来自定义一个启动器，那么你需要先选择导入核心启动器：
 ```xml
-    <dependency>
-        <groupId>io.github.simple-robot</groupId>
-        <artifactId>core.spring-boot-starter</artifactId>
-        <version>${version}</version>
-    </dependency>
+        <dependency>
+            <groupId>io.github.ForteScarlet.simple-robot-core</groupId>
+            <artifactId>core-spring-boot-starter</artifactId>
+            <version>${version}</version>
+        </dependency>
 ```
 
 然后参考注解类`@SimpleRobotSpringBootApplication`内容。
