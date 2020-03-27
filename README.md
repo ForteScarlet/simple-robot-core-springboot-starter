@@ -43,14 +43,14 @@
 - `MsgProcessor`，当前组件的监听消息触发器，即传入一个`MsgGet`实例来触发监听消息
 - `BotManager`，Bot管理器
 - `DependCenter`，simple-robot内部的依赖管理器。在整合了Springboot之后便会主要依赖于Springboot的beanFactory。
-- 组件所实现的SENDER(SenderSendList接口实例), 例如CQ HTTP组件内部的`CoolQHttpMsgSender`对象实例。
-- 组件所实现的GETTER(SenderGetList接口实例), 例如CQ HTTP组件内部的`CoolQHttpMsgSender`对象实例。
-- 组件所实现的SETTER(SenderSetList接口实例), 例如CQ HTTP组件内部的`CoolQHttpMsgSender`对象实例。
+- 组件所实现的SENDER(`SenderSendList`接口实例), 例如CQ HTTP组件内部的`CoolQHttpMsgSender`对象实例。
+- 组件所实现的GETTER(`SenderGetList`接口实例), 例如CQ HTTP组件内部的`CoolQHttpMsgSender`对象实例。
+- 组件所实现的SETTER(`SenderSetList`接口实例), 例如CQ HTTP组件内部的`CoolQHttpMsgSender`对象实例。
 
 
 # 版本规则
 对于所有的启动器版本命名规则定义如下: 
-格式为`a.b`, 其中，**`a`**为此启动器所对应的核心版本系，**`b`**代表当前启动器的版本。
+格式为`a.b`, 其中，**`a`** 为此启动器所对应的核心版本系，**`b`** 代表当前启动器的版本。
 例如：
 `1.9.0`, `1.9.1`
 
