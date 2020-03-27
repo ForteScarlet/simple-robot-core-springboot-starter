@@ -6,7 +6,7 @@
 
 首先，在使用springboot启动器之前，你需要使用springboot的 **properties** 格式配置文件：`application.properties`, 并将simple-robot中的配置项写入此类配置文件中。
 <br>
-其次，一般拥有springboot启动器的组件所处的核心系版本，都是从`1.9.x`开始的。
+其次，一般拥有springboot启动器的组件所处的核心系版本，都是从核心的`1.9.x`开始的。
 
 ##  组件启动器
 我为一些特定的组件提供了其专属的启动器。
@@ -74,3 +74,36 @@ implementation 'io.github.ForteScarlet.simple-robot:core-spring-boot-starter:${v
 `1.9.0`, `1.9.1`
 
 这两个版本中，`a`均为`1.9`，`b`为`0`和`1`，都代表其内部使用的是`1.9.x`的核心（一般来讲都是最后一个版本的核心版本。），只不过`1.9.1`相对于`1.9.0`来讲更新、修复、改善了一些东西。
+
+# 注意事项
+## 1 启动器中的核心版本系与当前核心版本系
+一般来讲，启动器所提供的核心版本系总是会比当前的核心版本系要低一个级别。例如，当前核心是`1.10.4`版本，即`1.10.x`系列，则最高版本的启动器一般会是`1.9.x`系列。
+
+为什么呢？因为启动器一般来讲是需要保证其中所使用的核心为最新版本的，而当前所处的核心版本系中是无法保证最新版本的版本号的。
+
+## 2 快速启动器中的springboot版本
+截至到当前启动器版本为止，快速启动器中所包含的Springboot项目依赖的坐标与版本如下：
+```xml
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>2.2.5.RELEASE</version>
+        </dependency>
+```
+如有需要请自行覆盖并更替其版本。
+
+## 快速启动器的日志整合
+官方的组件快速启动器中，`QQLog`的日志输出已经被重定向到了Springboot所使用的`slf4j`日志中，其中日志等级的对应关系为：
+
+| QQLog的日志等级 | slf4j的日志等级 |
+| --------------- | --------------- |
+| debug           | debug           |
+| info            | info            |
+| success         | info            |
+| warning         | warn            |
+| error           | error           |
+
+整合后，日志所使用的`name`为`simple-robot-app + 随机颜表情`的名称。其中，``simple-robot-app`后面是有一个空格的。
+
+如果想要关闭颜表情，你可以在项目启动器调用`FaceUtil.close()` 
+

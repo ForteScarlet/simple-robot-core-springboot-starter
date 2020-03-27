@@ -1,6 +1,5 @@
 package com.simplerobot.core.springboot.configuration;
 
-import com.forte.qqrobot.BaseApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
