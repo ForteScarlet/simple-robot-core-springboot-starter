@@ -81,6 +81,27 @@ public class SpringBootSimpleRobotAutoConfiguration {
     public DependCenter getDependCenter(SimpleRobotContext context) {
         return context.getDependCenter();
     }
+    /**
+     * 向Springboot注入SENDER
+     */
+    @Bean
+    public SenderSendList getSenderSendList(SimpleRobotContext context) {
+        return context.SENDER;
+    }
+    /**
+     * 向Springboot注入GETTER
+     */
+    @Bean
+    public SenderGetList getSenderGetList(SimpleRobotContext context) {
+        return context.GETTER;
+    }
+    /**
+     * 向Springboot注入SETTER
+     */
+    @Bean
+    public SenderSetList getSenderSetList(SimpleRobotContext context) {
+        return context.SETTER;
+    }
 
 
 
