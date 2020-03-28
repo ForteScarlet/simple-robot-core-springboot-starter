@@ -13,8 +13,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * enable auto config simple-robot with springboot
- * @author <a href="https://github.com/ForteScarlet"> ForteScarlet </a>
+ * 现在只需要使用{@link SpringBootApplication}即可。
+ * @deprecated
  */
 @Retention(RetentionPolicy.RUNTIME)    //注解会在class字节码文件中存在，在运行时可以通过反射获取到
 @Target({ElementType.TYPE}) //接口、类、枚举、注解、方法
@@ -24,13 +24,11 @@ import java.lang.annotation.Target;
                 "com.simplerobot.core.springboot.configuration",
                 "com.simplerobot.component.springboot.configuration"
         }),
-//        @ComponentScan(excludeFilters = { @ComponentScan.Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
-//                @ComponentScan.Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
 })
+@Deprecated
 public @interface SimpleRobotSpringBootApplication {
 
         //**************** springbootApplication的注解 ****************//
-
 
         /**
          * Exclude specific auto-configuration classes such that they will never be applied.
