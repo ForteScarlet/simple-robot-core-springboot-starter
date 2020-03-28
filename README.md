@@ -17,7 +17,10 @@
 ##  组件启动器
 我为一些特定的组件提供了其专属的启动器。
 一般来讲，所有官方（即我）推出的启动器都只需要如上文所说的，
-将配置文件更换为properties格式并将`@SpringbootApplication`注解替换为`@SimpleRobotSpringbootApplication`即可。
+将配置文件更换为properties格式 ~~并将`@SpringbootApplication`注解替换为`@SimpleRobotSpringbootApplication`即可。~~
+
+**从`1.9.1`开始，不再需要任何自定义注解。直接使用`@SpringbootApplication`启动即可。除非你要使用tomcat或者undertow之类的服务器来代替原本的内置http服务器，否则无需书写额外代码，直接编写监听器即可。**
+
 <br>
 以下我将展示已经提供了官方启动器的项目地址，以供参考。
 <br>
@@ -42,12 +45,14 @@ https://github.com/ForteScarlet/simple-robot-component-cqhttp-springboot-starter
 implementation 'io.github.ForteScarlet.simple-robot:core-spring-boot-starter:${version}'
 ```
 
-然后参考注解类`@SimpleRobotSpringBootApplication`内容。
-`@SimpleRobotSpringBootApplication`内默认继承了springboot的启动类注解`@SpringbootApplication`, 
-并且其中会去默认扫描一个组件的自动配置包路径：
-- `com.simplerobot.core.springboot.configuration`
+~~然后参考注解类`@SimpleRobotSpringBootApplication`内容。~~
+~~`@SimpleRobotSpringBootApplication`内默认继承了springboot的启动类注解`@SpringbootApplication`, 
+并且其中会去默认扫描一个组件的自动配置包路径：~~
+~~- `com.simplerobot.core.springboot.configuration`~~
 
-核心启动器需要某个组件启动器通过Spring向其提供一些启动所需的必要对象：
+`1.9.1`之后使用spring.factory进行自动配置，将不会为组件扫描特定的包路径了。
+
+核心启动器需要某个组件启动器通过Spring向其**提供一些启动所需的必要对象**：
 - `BaseApplication`的实现类
 - 整合了springboot的beanFactory且标注了`@SimpleRobotApplication(resources = "/application.properties")`注解的App接口实例。
 
@@ -56,7 +61,10 @@ implementation 'io.github.ForteScarlet.simple-robot:core-spring-boot-starter:${v
 
 
 # 使用
-如果你使用的是我编写的标准版的快速启动器，你只需要将原本Springboot启动器上的`@SpringbootApplication`注解替换为`@SimpleRobotSpringBootApplication`即可。
+如果你使用的是我编写的标准版的快速启动器，~~你只需要将原本Springboot启动器上的`@SpringbootApplication`注解替换为`@SimpleRobotSpringBootApplication`即可。~~
+
+`1.9,1`后无需变更注解，导入官方的快速启动器坐标后即可直接使用。（记得删除旧的config代码，防止依赖冲突。）
+
 如果是第三方所提供的启动器，则遵循其定义的规则。
 
 如果启动器完整且正常，你最终可以得到如下内容：
