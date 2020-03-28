@@ -14,7 +14,7 @@
 
     <groupId>io.github.ForteScarlet.simple-robot</groupId>
     <artifactId>core-spring-boot-starter</artifactId>
-    <!-- version 1.9.0 20/3/27 -->
+    <!-- version 1.9.1 20/3/28 -->
     <version>1.9.1</version>
 
     <dependencies>
