@@ -9,6 +9,7 @@ import com.forte.qqrobot.log.QQLogBack;
 import com.forte.qqrobot.sender.senderlist.SenderGetList;
 import com.forte.qqrobot.sender.senderlist.SenderSendList;
 import com.forte.qqrobot.sender.senderlist.SenderSetList;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +26,9 @@ public class SpringBootSimpleRobotAutoConfiguration {
      */
     @Autowired
     private ApplicationArguments arguments;
+
+    @Autowired
+    private BeanFactory beanFactory;
 
     @Bean
     public <
@@ -51,6 +55,10 @@ public class SpringBootSimpleRobotAutoConfiguration {
         return context;
     }
 
+
+    public SpringBootDependGetter getSpringBootDependGetter(){
+        return new SpringBootDependGetter(beanFactory);
+    }
 
     @Bean
     public SimpleRobotNameLogger getRobotNameLogger(){
