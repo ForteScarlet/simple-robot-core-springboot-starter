@@ -57,6 +57,7 @@ implementation 'io.github.ForteScarlet.simple-robot:core-spring-boot-starter:${v
 - 整合了springboot的beanFactory且标注了`@SimpleRobotApplication(resources = "/application.properties")`注解的App接口实例。
 
 而核心会为组件启动器的构建所提供的bean有：
+- `SpringBootDependGetter`对象，整合了Springboot的beanfactory的DependGetter。
 - `SpringbootQQLogBack`对象，用来初始化QQLog的logback，使其与springboot的日志相结合。
 
 

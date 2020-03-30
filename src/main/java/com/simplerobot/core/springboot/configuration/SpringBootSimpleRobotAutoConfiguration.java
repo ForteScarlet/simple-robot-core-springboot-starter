@@ -55,7 +55,7 @@ public class SpringBootSimpleRobotAutoConfiguration {
         return context;
     }
 
-
+    @Bean
     public SpringBootDependGetter getSpringBootDependGetter(){
         return new SpringBootDependGetter(beanFactory);
     }
