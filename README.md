@@ -122,3 +122,6 @@ implementation 'io.github.ForteScarlet.simple-robot:core-spring-boot-starter:${v
 
 如果想要关闭颜表情，你可以在项目启动**之前**调用`FaceUtil.close()` 
 
+
+# 更新日志
+查看[UPDATE.md](./UPDATE.md)文件
