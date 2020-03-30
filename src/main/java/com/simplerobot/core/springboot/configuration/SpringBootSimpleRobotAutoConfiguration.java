@@ -3,11 +3,13 @@ package com.simplerobot.core.springboot.configuration;
 import com.forte.qqrobot.*;
 import com.forte.qqrobot.bot.BotManager;
 import com.forte.qqrobot.depend.DependCenter;
+import com.forte.qqrobot.log.LogLevel;
+import com.forte.qqrobot.log.QQLog;
+import com.forte.qqrobot.log.QQLogBack;
 import com.forte.qqrobot.sender.senderlist.SenderGetList;
 import com.forte.qqrobot.sender.senderlist.SenderSendList;
 import com.forte.qqrobot.sender.senderlist.SenderSetList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,8 +34,21 @@ public class SpringBootSimpleRobotAutoConfiguration {
             GET extends SenderGetList,
             CONTEXT extends SimpleRobotContext<SEND, SET, GET>
             >
-    CONTEXT getSimpleRobotContext(BaseApplication<CONFIG, SEND, SET, GET, CONTEXT> baseApplication, Application<CONFIG> app) {
-        return baseApplication.runWithApplication(app, arguments.getSourceArgs());
+    CONTEXT getSimpleRobotContext(BaseApplication<CONFIG, SEND, SET, GET, CONTEXT> baseApplication, Application<CONFIG> app, SpringbootQQLogBack logBack) {
+        final CONTEXT context = baseApplication.runWithApplication(app, arguments.getSourceArgs());
+        LogLevel minValue = LogLevel.DEBUG;
+        for (LogLevel value : LogLevel.values()) {
+            if(value.getLevel() < minValue.getLevel()){
+                minValue = value;
+            }
+        }
+        // 将日志等级设置为最低（越低输出量越多），且组件启动器此时应当已经将日志处理交由spring的日志管理
+        QQLog.setGlobalLevel(minValue);
+        final QQLogBack springLogBack = logBack.getLogBack();
+        if(QQLog.getLogBack() != springLogBack){
+            QQLog.setLogBack(springLogBack);
+        }
+        return context;
     }
 
 
