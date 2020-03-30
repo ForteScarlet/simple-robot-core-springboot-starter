@@ -1,6 +1,5 @@
 package com.simplerobot.core.springboot.configuration;
 
-import static com.forte.qqrobot.log.LogLevel.*;
 import com.forte.qqrobot.log.QQLogBack;
 import org.slf4j.Logger;
 
