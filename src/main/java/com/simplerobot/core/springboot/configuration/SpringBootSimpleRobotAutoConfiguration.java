@@ -35,6 +35,10 @@ public class SpringBootSimpleRobotAutoConfiguration {
             CONTEXT extends SimpleRobotContext<SEND, SET, GET>
             >
     CONTEXT getSimpleRobotContext(BaseApplication<CONFIG, SEND, SET, GET, CONTEXT> baseApplication, Application<CONFIG> app, SpringbootQQLogBack logBack) {
+        final QQLogBack springLogBack = logBack.getLogBack();
+        if(QQLog.getLogBack() != springLogBack){
+            QQLog.changeQQLogBack(springLogBack);
+        }
         final CONTEXT context = baseApplication.runWithApplication(app, arguments.getSourceArgs());
         LogLevel minValue = LogLevel.DEBUG;
         for (LogLevel value : LogLevel.values()) {
@@ -44,10 +48,6 @@ public class SpringBootSimpleRobotAutoConfiguration {
         }
         // 将日志等级设置为最低（越低输出量越多），且组件启动器此时应当已经将日志处理交由spring的日志管理
         QQLog.setGlobalLevel(minValue);
-        final QQLogBack springLogBack = logBack.getLogBack();
-        if(QQLog.getLogBack() != springLogBack){
-            QQLog.setLogBack(springLogBack);
-        }
         return context;
     }
 
