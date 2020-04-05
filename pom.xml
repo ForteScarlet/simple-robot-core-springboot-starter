@@ -14,8 +14,8 @@
 
     <groupId>io.github.ForteScarlet.simple-robot</groupId>
     <artifactId>core-spring-boot-starter</artifactId>
-    <!-- version .3 20/3/30 -->
-    <version>1.9.3</version>
+    <!-- version 1.10.0 20/4/5 -->
+    <version>1.10.0</version>
 
     <dependencies>
         <!-- springboot starter -->
@@ -26,11 +26,12 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.github.ForteScarlet/simple-robot-core -->
-        <!-- 1.9.x中的最高版本 -->
+        <!-- 1.10.x中的最高版本: 1.10.7 -->
+        <!-- 1.9.x中的最高版本: 1.9.0 -->
         <dependency>
             <groupId>io.github.ForteScarlet</groupId>
             <artifactId>simple-robot-core</artifactId>
-            <version>1.9.0</version>
+            <version>1.10.7</version>
         </dependency>
     </dependencies>
 

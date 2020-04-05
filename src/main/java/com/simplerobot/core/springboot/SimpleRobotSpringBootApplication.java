@@ -2,7 +2,8 @@ package com.simplerobot.core.springboot;
 
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.ElementType;
