@@ -14,8 +14,8 @@
 
     <groupId>io.github.ForteScarlet.simple-robot</groupId>
     <artifactId>core-spring-boot-starter</artifactId>
-    <!-- version 1.10.0 20/4/5 -->
-    <version>1.10.0</version>
+    <!-- version 1.11.0 20/4/14 -->
+    <version>1.11.0</version>
 
     <dependencies>
         <!-- springboot starter -->
@@ -31,7 +31,7 @@
         <dependency>
             <groupId>io.github.ForteScarlet</groupId>
             <artifactId>simple-robot-core</artifactId>
-            <version>1.10.7</version>
+            <version>1.11.2</version>
         </dependency>
     </dependencies>
 
