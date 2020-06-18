@@ -10,6 +10,7 @@ import com.forte.qqrobot.utils.CQCodeUtil;
 /**
  * @author <a href="https://github.com/ForteScarlet"> ForteScarlet </a>
  */
+@Deprecated
 @SimpleRobotApplication(resources = "/application.properties")
 public class BaseApp implements Application {
     private DependGetter dependGetter;
