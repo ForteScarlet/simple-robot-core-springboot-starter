@@ -1,7 +1,6 @@
 package com.simplerobot.core.springboot.configuration;
 
 import com.forte.qqrobot.*;
-import com.forte.qqrobot.anno.depend.Beans;
 import com.forte.qqrobot.bot.BotManager;
 import com.forte.qqrobot.depend.DependCenter;
 import com.forte.qqrobot.log.LogLevel;
@@ -15,20 +14,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.io.IOException;
 
 /**
  * @author <a href="https://github.com/ForteScarlet"> ForteScarlet </a>
  */
+@SuppressWarnings({"SpringJavaInjectionPointsAutowiringInspection", "SpringJavaAutowiredFieldsWarningInspection"})
 @Configuration
 public class SpringBootSimpleRobotAutoConfiguration {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger("SimpleRobotAutoConfiguration");
+    private static final Logger LOGGER = LoggerFactory.getLogger("SimpleRobotAutoConfiguration " + FaceUtil.getFace());
 
     /**
      * 主要用来获取main方法中的args参数
@@ -40,7 +36,6 @@ public class SpringBootSimpleRobotAutoConfiguration {
     private BeanFactory beanFactory;
 
     @Bean
-//    @ConditionalOnBean({BaseApplication.class, Application.class})
     public <
             CONFIG extends BaseConfiguration,
             SEND extends SenderSendList,
@@ -54,78 +49,27 @@ public class SpringBootSimpleRobotAutoConfiguration {
         if(QQLog.getLogBack() != springLogBack){
             QQLog.changeQQLogBack(springLogBack);
         }
-        final CONTEXT context = baseApplication.runWithApplication(app, arguments == null ? new String[0] : arguments.getSourceArgs());
+
         LogLevel minValue = LogLevel.DEBUG;
         for (LogLevel value : LogLevel.values()) {
             if(value.getLevel() < minValue.getLevel()){
                 minValue = value;
             }
         }
-        // 将日志等级设置为最低（越低输出量越多），且组件启动器此时应当已经将日志处理交由spring的日志管理
+        // 将日志等级设置为最低（越低输出量越多）
         QQLog.setGlobalLevel(minValue);
+
+        final CONTEXT context = baseApplication.runWithApplication(app, arguments == null ? new String[0] : arguments.getSourceArgs());
+        final BaseConfiguration conf = baseApplication.getDependCenter().get(BaseConfiguration.class);
+        if(conf.getScannerPackage().isEmpty()){
+            LOGGER.warn("no scan package! please set 'simbot.core.scannerPackage'");
+            LOGGER.warn("      ↓↓↓↓↓↓↓↓");
+            LOGGER.warn("检测到未指定包扫描路径！可能有很大概率出现监听函数无法扫描加载的问题。建议在配置文件中追加配置项'simbot.core.scannerPackage'以指定监听函数的扫描路径。");
+            LOGGER.warn("      ↑↑↑↑↑↑↑↑");
+        }
+
         return context;
     }
-
-//    @Bean
-//    @ConditionalOnMissingBean({BaseApplication.class, Application.class})
-//    public SimpleRobotContext getSimpleRobotContextOnMissAll(SpringbootQQLogBack logBack) throws IOException {
-//        LOGGER.info("auto load application and app.");
-//        final QQLogBack springLogBack = logBack.getLogBack();
-//        if(QQLog.getLogBack() != springLogBack){
-//            QQLog.changeQQLogBack(springLogBack);
-//        }
-//        final SimpleRobotContext context = BaseApplication.runAuto(BaseApp.class, arguments == null ? new String[0] : arguments.getSourceArgs());
-//        LogLevel minValue = LogLevel.DEBUG;
-//        for (LogLevel value : LogLevel.values()) {
-//            if(value.getLevel() < minValue.getLevel()){
-//                minValue = value;
-//            }
-//        }
-//        // 将日志等级设置为最低（越低输出量越多），且组件启动器此时应当已经将日志处理交由spring的日志管理
-//        QQLog.setGlobalLevel(minValue);
-//        return context;
-//    }
-//
-//    @Bean
-//    @ConditionalOnMissingBean({BaseApplication.class})
-//    public SimpleRobotContext getSimpleRobotContextOnMissBaseApplication(Application app, SpringbootQQLogBack logBack) throws IOException {
-//        LOGGER.info("auto load application, load app " + app.getApplicationClass());
-//        final QQLogBack springLogBack = logBack.getLogBack();
-//        if(QQLog.getLogBack() != springLogBack){
-//            QQLog.changeQQLogBack(springLogBack);
-//        }
-//        final SimpleRobotContext context = BaseApplication.runAuto(app.getApplicationClass(), arguments == null ? new String[0] : arguments.getSourceArgs());
-//        LogLevel minValue = LogLevel.DEBUG;
-//        for (LogLevel value : LogLevel.values()) {
-//            if(value.getLevel() < minValue.getLevel()){
-//                minValue = value;
-//            }
-//        }
-//        // 将日志等级设置为最低（越低输出量越多），且组件启动器此时应当已经将日志处理交由spring的日志管理
-//        QQLog.setGlobalLevel(minValue);
-//        return context;
-//    }
-//
-//    @Bean
-//    @ConditionalOnMissingBean({Application.class})
-//    public SimpleRobotContext getSimpleRobotContextOnMissApplication(BaseApplication application, SpringbootQQLogBack logBack) throws IOException {
-//        LOGGER.info("auto load app, load application " + application.getClass());
-//        final QQLogBack springLogBack = logBack.getLogBack();
-//        if(QQLog.getLogBack() != springLogBack){
-//            QQLog.changeQQLogBack(springLogBack);
-//        }
-//        final SimpleRobotContext context = application.runWithApplication(new BaseApp(), arguments == null ? new String[0] : arguments.getSourceArgs());
-//        LogLevel minValue = LogLevel.DEBUG;
-//        for (LogLevel value : LogLevel.values()) {
-//            if(value.getLevel() < minValue.getLevel()){
-//                minValue = value;
-//            }
-//        }
-//        // 将日志等级设置为最低（越低输出量越多），且组件启动器此时应当已经将日志处理交由spring的日志管理
-//        QQLog.setGlobalLevel(minValue);
-//        return context;
-//    }
-
 
 
     @Bean
