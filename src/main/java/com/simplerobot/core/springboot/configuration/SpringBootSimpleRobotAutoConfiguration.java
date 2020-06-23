@@ -14,13 +14,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * @author <a href="https://github.com/ForteScarlet"> ForteScarlet </a>
  */
-@SuppressWarnings({"SpringJavaInjectionPointsAutowiringInspection", "SpringJavaAutowiredFieldsWarningInspection"})
+@SuppressWarnings({"SpringJavaInjectionPointsAutowiringInspection", "SpringJavaAutowiredFieldsWarningInspection", "unchecked"})
 @Configuration
 public class SpringBootSimpleRobotAutoConfiguration {
 
@@ -29,21 +30,14 @@ public class SpringBootSimpleRobotAutoConfiguration {
     /**
      * 主要用来获取main方法中的args参数
      */
-    @Autowired(required = false)
+    @Autowired
     private ApplicationArguments arguments;
 
     @Autowired
     private BeanFactory beanFactory;
 
     @Bean
-    public <
-            CONFIG extends BaseConfiguration,
-            SEND extends SenderSendList,
-            SET extends SenderSetList,
-            GET extends SenderGetList,
-            CONTEXT extends SimpleRobotContext<SEND, SET, GET>
-            >
-    CONTEXT getSimpleRobotContext(BaseApplication<CONFIG, SEND, SET, GET, CONTEXT> baseApplication, Application<CONFIG> app, SpringbootQQLogBack logBack) {
+    public SimpleRobotContext getSimpleRobotContext(BaseApplication baseApplication, Application app, SpringbootQQLogBack logBack) {
         LOGGER.info("load application " + baseApplication.getClass() + " and app " + app.getApplicationClass());
         final QQLogBack springLogBack = logBack.getLogBack();
         if(QQLog.getLogBack() != springLogBack){
@@ -59,7 +53,7 @@ public class SpringBootSimpleRobotAutoConfiguration {
         // 将日志等级设置为最低（越低输出量越多）
         QQLog.setGlobalLevel(minValue);
 
-        final CONTEXT context = baseApplication.runWithApplication(app, arguments == null ? new String[0] : arguments.getSourceArgs());
+        final SimpleRobotContext context = baseApplication.runWithApplication(app, arguments == null ? new String[0] : arguments.getSourceArgs());
         final BaseConfiguration conf = baseApplication.getDependCenter().get(BaseConfiguration.class);
         if(conf.getScannerPackage().isEmpty()){
             LOGGER.warn("no scan package! please set 'simbot.core.scannerPackage'");
@@ -76,6 +70,7 @@ public class SpringBootSimpleRobotAutoConfiguration {
     public SpringBootDependGetter getSpringBootDependGetter(){
         return new SpringBootDependGetter(beanFactory);
     }
+
 
     @Bean
     public SimpleRobotNameLogger getRobotNameLogger(){
@@ -95,6 +90,7 @@ public class SpringBootSimpleRobotAutoConfiguration {
      * 向Springboot注入字符串消息转化器
      */
     @Bean
+    @ConditionalOnBean(SimpleRobotContext.class)
     public MsgParser getMsgParser(SimpleRobotContext context) {
         return context.getMsgParser();
     }
@@ -103,6 +99,7 @@ public class SpringBootSimpleRobotAutoConfiguration {
      * 向Springboot注入监听消息触发器
      */
     @Bean
+    @ConditionalOnBean(SimpleRobotContext.class)
     public MsgProcessor getMsgProcessor(SimpleRobotContext context) {
         return context.getMsgProcessor();
     }
@@ -111,6 +108,7 @@ public class SpringBootSimpleRobotAutoConfiguration {
      * 向Springboot注入bot管理器
      */
     @Bean
+    @ConditionalOnBean(SimpleRobotContext.class)
     public BotManager getBotManager(SimpleRobotContext context) {
         return context.getBotManager();
     }
@@ -119,6 +117,7 @@ public class SpringBootSimpleRobotAutoConfiguration {
      * 向Springboot注入simpleRobot的依赖中心
      */
     @Bean
+    @ConditionalOnBean(SimpleRobotContext.class)
     public DependCenter getDependCenter(SimpleRobotContext context) {
         return context.getDependCenter();
     }
@@ -126,6 +125,7 @@ public class SpringBootSimpleRobotAutoConfiguration {
      * 向Springboot注入SENDER
      */
     @Bean
+    @ConditionalOnBean(SimpleRobotContext.class)
     public SenderSendList getSenderSendList(SimpleRobotContext context) {
         return context.SENDER;
     }
@@ -133,6 +133,7 @@ public class SpringBootSimpleRobotAutoConfiguration {
      * 向Springboot注入GETTER
      */
     @Bean
+    @ConditionalOnBean(SimpleRobotContext.class)
     public SenderGetList getSenderGetList(SimpleRobotContext context) {
         return context.GETTER;
     }
@@ -140,6 +141,7 @@ public class SpringBootSimpleRobotAutoConfiguration {
      * 向Springboot注入SETTER
      */
     @Bean
+    @ConditionalOnBean(SimpleRobotContext.class)
     public SenderSetList getSenderSetList(SimpleRobotContext context) {
         return context.SETTER;
     }
