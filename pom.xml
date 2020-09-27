@@ -41,6 +41,13 @@
             <version>${core.version}</version>
         </dependency>
 
+        <!-- https://search.maven.org/artifact/love.forte.simple-robot-module/simple-robot-module-debugger-common -->
+        <dependency>
+            <groupId>love.forte.simple-robot-module</groupId>
+            <artifactId>simple-robot-module-debugger-common</artifactId>
+            <version>1.1-1.15</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
